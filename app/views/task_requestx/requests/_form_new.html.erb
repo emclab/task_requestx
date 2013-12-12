@@ -1,0 +1,19 @@
+<h4><%=@title%></h4>
+<%= simple_form_for(@request) do |f| %>    
+ 
+  <%= f.input :task_name, :label => 'Task Name', :readonly => true, :input_html => {:value => eval(TaskRequestx.task_name_in_edit.to_s)}%>
+  <%= f.input :name, :label => 'Request Name' %>
+  <%= f.input :request_date, :label => 'Request Date', :as => :string %>
+  <%= f.input :request_content, :label => 'Request Content', :input_html => {:rows => 3} %>
+  <%= f.input :expected_finish_date, :label => 'Finish Date', :as => :string %>  
+  <%= f.input :request_status_id, :label => 'Request Status', :collection => Commonx::CommonxHelper.return_misc_definitions('task_status'), :include_blank => true %>
+  <%= f.input :expedite, :label => 'Expedite', :as => :boolean  %>
+  <%= f.input :need_delivery, :label => 'Need Delivery', :as => :boolean %>
+  <div id="task_request_delivery_info">
+  <%= f.input :what_to_deliver, :label => 'What to Deliver', :input_html => {:rows => 4} %>  
+  <%= f.input :delivery_instruction, :label => 'Delivery Instruction', :input_html => {:rows => 4} %>
+  </div>
+  
+  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action'] %>
+  <%= f.button :submit, t('Save'), :class => BUTTONS_CLS['action'] %>  
+<% end %> 

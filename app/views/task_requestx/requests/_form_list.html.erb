@@ -1,0 +1,43 @@
+<% if false %>
+  <%= render inline: ERB.new(@erb_code).result(binding) %>
+  
+<% else %>
+<h4><%=@title %></h4>
+<div class="pigination"><%= will_paginate models %></div>
+<table class="table table-striped">
+  <tr>
+    <th>#</th>
+    <th><%=t('Task') %></th>
+    <th><%=t('Request Name') %></th>
+    <th><%=t('Request Date') %></th>
+    <th><%=t('Finish Date') %></th>   
+    <th><%=t('RequestStatus') %></th>   
+    <th><%=t('Completed') %></th>
+    <th><%=t('Requested By') %></th>
+    <th></th>
+    
+  </tr>
+
+<% models.each do |r| %>
+  <tr>
+  	
+  	<td><%= link_to r.id.to_s, SUBURI + "/authentify/view_handler?index=1&url=#{request_path(r.id, :task_id => r.task_id)}" %></td>
+  	<% if has_action_right?('show', TaskRequestx.task_class.to_s.underscore.pluralize, r.task)%>
+  	  <td><%= link_to eval(TaskRequestx.task_name_in_index.to_s), SUBURI + "/authentify/view_handler?index=1&url=#{SUBURI + CGI::escape(eval(TaskRequestx.show_task_path))}" %></td>
+  	<% else %>
+  	  <td><%= eval(TaskRequestx.task_name_in_index.to_s) %></td>
+  	<% end %>
+  	<td><%= prt(r, :name) %></td>
+  	<td><%= r.request_date.strftime("%Y/%m/%d") %></td>
+  	<td><%= r.expected_finish_date.strftime("%Y/%m/%d") %></td>
+  	<td><%= prt(r, 'request_status.name') %></td>       
+    <td><%= t(prt(r, :completed).to_s) %></td>
+    <td><%= prt(r, 'requested_by.name') %></td>  
+    <td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{CGI::escape(edit_request_path(r, :parent_record_id => r.task, :parent_resource => TaskRequestx.task_class.to_s.underscore.pluralize))}", :class => BUTTONS_CLS['action']  if has_action_right?('update', params[:controller], r) %> </td>
+
+  </tr>
+<% end %>
+</table>
+  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action']  %>
+  <%= link_to t('New Task Request'), SUBURI + "/authentify/view_handler?index=1&url=#{CGI::escape(new_request_path(:task_id => @task.id, :parent_record_id => @task.id, :parent_resource => TaskRequestx.task_class.to_s.underscore.pluralize))}", :class => BUTTONS_CLS['action'] if @task && has_action_right?('create', params[:controller], @task) %>
+<% end %> 
