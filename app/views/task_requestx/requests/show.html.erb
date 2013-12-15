@@ -1,7 +1,7 @@
-<div id='main_body'>
-<% if false %>
+<% if @view_in_config && @erb_code %>
 <%= render inline: ERB.new(@erb_code).result(binding)%>
 <% else %>
+<div id='main_body'>
 <h4><%=@title%> </h4>
 
 <p>
@@ -63,5 +63,5 @@
 	</table>
 
 	<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close', :class => BUTTONS_CLS['action']%>
-<% end %>
 </div>
+<% end %>

@@ -77,10 +77,10 @@ describe "LinkTests" do
     it "works! (now write some real specs)" do
       qs = FactoryGirl.create(:task_requestx_request, :last_updated_by_id => @u.id, :task_id => @task.id, :request_status_id => @task_status.id)
       visit requests_path(:task_id => @task.id)
-      save_and_open_page
+      #save_and_open_page
       page.should have_content('Task Requests')
       click_link 'New Task Request'
-      save_and_open_page
+      #save_and_open_page
       page.should have_content('New Task Request')
       visit requests_path
       click_link qs.id.to_s
