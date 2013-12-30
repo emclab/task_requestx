@@ -5,6 +5,7 @@
 <%= simple_form_for(@request) do |f| %>    
  
   <%= f.input :task_name, :label => 'Task Name', :readonly => true, :input_html => {:value => eval(TaskRequestx.task_name_in_edit.to_s)}%>
+  <%= f.input :task_id, :as => :hidden, :input_html => {:value => @task.id }%>
   <%= f.input :name, :label => 'Request Name' %>
   <%= f.input :request_date, :label => 'Request Date', :as => :string %>
   <%= f.input :request_content, :label => 'Request Content', :input_html => {:rows => 3} %>

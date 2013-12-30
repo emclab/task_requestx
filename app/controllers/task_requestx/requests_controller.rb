@@ -57,6 +57,7 @@ module TaskRequestx
       @task = TaskRequestx.task_class.find_by_id(params[:task_id]) if params[:task_id].present? && params[:task_id].to_i > 0
       @request = TaskRequestx::Request.find_by_id(params[:id]) if params[:id].present?
       @task = TaskRequestx.task_class.find_by_id(TaskRequestx::Request.find_by_id(params[:id]).task_id) if params[:id].present?
+      @task = TaskRequestx.task_class.find_by_id(params[:request][:task_id]) if params[:request].present? && params[:request][:task_id].to_i > 0  #for render new if error
     end
   end
 end
