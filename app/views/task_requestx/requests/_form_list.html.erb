@@ -38,6 +38,14 @@
   </tr>
 <% end %>
 </table>
+
+<table class="table table-striped">
+  <tr>
+    <th>
   <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action']  %>
   <%= link_to t('New Task Request'), SUBURI + "/authentify/view_handler?index=1&url=#{CGI::escape(new_request_path(:task_id => @task.id, :parent_record_id => @task.id, :parent_resource => TaskRequestx.task_class.to_s.underscore.pluralize))}", :class => BUTTONS_CLS['action'] if @task && has_action_right?('create', params[:controller], @task) %>
+    </th>
+  </tr>
+</table>
+
 <% end %> 
