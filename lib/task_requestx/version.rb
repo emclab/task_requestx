@@ -1,3 +1,3 @@
 module TaskRequestx
-  VERSION = "3.2.12.02"
+  VERSION = "3.2.12.03"
 end

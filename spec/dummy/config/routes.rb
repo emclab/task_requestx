@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get "user_menus/index"
-
   mount TaskRequestx::Engine => "/task_requestx"
   mount Commonx::Engine => "/commonx"
   mount Authentify::Engine => '/authentify'
